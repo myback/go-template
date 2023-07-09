@@ -12,9 +12,12 @@ Python bindings for go text/template
 ## Quickstart
 
 ### Pip
-`go_template` works Python 2.7, 3.5, 3.6, 3.7.
+`go_template` works Python 3.5+.
 ```
-pip install go_template
+# if your system does not have python and golang
+make build-in-docker
+# else
+make build-on-host
 ```
 
 ## Example
@@ -23,28 +26,27 @@ Content of sample.tmpl
 ```
 {{.Count}} items are made of {{.Material}}
 ```
+
+1)  Render template from dict values
+```
+>>> import go_template
+>>> values = {"Count": 12, "Material": "Wool"}
+>>> go_template.render_go_template(Path('tests/sample.tmpl'), values)
+b'12 items are made of Wool'
+```
+
 Content of values.yml
 ```
 Count: 12
 Material: Wool
 ```
 
-1)  Print rendered output to stdout
+2) Render template from values.yml file
 ```
 >>> import go_template
->>> go_template.render_template('tests/sample.tmpl','tests/values.yml','')
-12 items are made of Wool
-```
-
-2) Get rendered output in a file
-```
->>> import go_template
->>> go_template.render_template('tests/sample.tmpl','tests/values.yml','output.txt')
-
-```
- Content of output.txt
-```
-12 items are made of Wool
+>>> from pathlib import Path
+>>> go_template.render_from_values_file(Path('tests/sample.tmpl'), Path('tests/values.yml'))
+b'12 items are made of Wool'
 ```
 
 
@@ -56,7 +58,7 @@ __NOTE__: Paths provided to render_template should either be absolute path or re
 For building a fresh shared object of text/template, you must have golang^1.5 installed.
 
 ```
-./build.sh
+make lib
 ```
 
 This will create [template.so](https://github.com/harsh-98/go-template/blob/master/bind/template.so) in the `bind` folder.

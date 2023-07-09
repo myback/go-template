@@ -106,3 +106,4 @@ go_template/bind
 .idea
 !go/lib
 bin/
+.go_cache/

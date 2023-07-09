@@ -24,10 +24,10 @@ def render(src_file: Path, values: dict) -> bytes:
     )
 
 
-def render_from_values_file(src_file: Path, values_file: str) -> bytes:
+def render_from_values_file(src_file: Path, values_file: Path) -> bytes:
     return ctypes.string_at(
         _render_from_values_file(
             str(src_file.resolve()).encode(),
-            values_file.encode()
+            str(values_file.resolve()).encode()
         )
     )

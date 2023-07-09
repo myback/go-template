@@ -47,7 +47,9 @@ func main() {
 	if len(*outputFilePath) > 0 {
 		fi, err := os.OpenFile(*outputFilePath, os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0644)
 		utils.CheckErr(err)
-		defer utils.CheckErr(fi.Close())
+		defer func() {
+			utils.CheckErr(fi.Close())
+		}()
 		out = fi
 	} else {
 		out = os.Stdout

@@ -34,7 +34,9 @@ func ReadValuesFile(valuesFile string) (map[string]any, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer CheckErr(fi.Close())
+	defer func() {
+		CheckErr(fi.Close())
+	}()
 
 	values := map[string]any{}
 	ext := filepath.Ext(filepath.Base(valuesFile))
