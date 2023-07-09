@@ -1,27 +1,33 @@
-from ctypes import *
+import ctypes
+import json
 import os
+from pathlib import Path
 
-root_dir = os.path.dirname(__file__)
-shared_lib = os.path.join(root_dir, 'bind', 'template.so')
-lib = cdll.LoadLibrary(shared_lib)
+lib_path = os.path.join(os.path.dirname(__file__), 'bind/template.so')
+lib = ctypes.cdll.LoadLibrary(lib_path)
 
-class GoString(Structure):
-    _fields_ = [("p", c_char_p), ("n", c_longlong)]
+_render = lib.Render
+_render.argtypes = [ctypes.c_char_p, ctypes.c_char_p]
+_render.restype = ctypes.c_void_p
 
-def get_go_string(val):
-    return GoString(val.encode('utf-8'), len(val))
+_render_from_values_file = lib.RenderFomValuesFile
+_render_from_values_file.argtypes = [ctypes.c_char_p, ctypes.c_char_p]
+_render_from_values_file.restype = ctypes.c_void_p
 
-def get_go_path(file):
-    if not os.path.isabs(file) and file:
-        file = os.path.join(os.getcwd(),file)
-    return get_go_string(file)
 
-def render_template(template, value_file, output):
-    template = get_go_path(template)
-    value_file = get_go_path(value_file)
-    output = get_go_path(output)
+def render(src_file: Path, values: dict) -> bytes:
+    return ctypes.string_at(
+        _render(
+            str(src_file.resolve()).encode(),
+            json.dumps(values).encode()
+        )
+    )
 
-    lib.RenderTemplate.argtypes = [GoString, GoString, GoString]
-    lib.RenderTemplate(template, value_file, output)
 
-# render_template('tests/sample.tmpl', 'tests/values.yml','')
+def render_from_values_file(src_file: Path, values_file: str) -> bytes:
+    return ctypes.string_at(
+        _render_from_values_file(
+            str(src_file.resolve()).encode(),
+            values_file.encode()
+        )
+    )

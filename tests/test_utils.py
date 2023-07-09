@@ -1,21 +1,20 @@
-import os
-import sys
 import unittest
+from pathlib import Path
 
 import go_template
-from go_template.utils import sha256sum
+
 
 class TestMethods(unittest.TestCase):
     def test_add(self):
-        test_dir = os.path.dirname(__file__)
-        go_template.render_template(
-            os.path.join(test_dir, 'sample.tmpl'),
-            os.path.join(test_dir, 'values.yml'),
-            os.path.join(test_dir, 'output.txt'))
+        values = {"Count": 12, "Material": "Wool"}
 
-        output_hash = sha256sum(os.path.join(test_dir, 'output.txt'))
-        test_hash = sha256sum(os.path.join(test_dir, 'test.txt'))
-        self.assertEqual(output_hash, test_hash)
+        render_data = go_template.render(Path('tests/sample.tmpl'), values).decode()
+
+        with open('tests/test.txt') as f:
+            test_data = f.read()
+
+        self.assertEqual(render_data, test_data)
+
 
 if __name__ == '__main__':
     unittest.main()

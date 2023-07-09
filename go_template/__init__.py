@@ -2,4 +2,4 @@
 
 __version__ = '0.0.3'
 
-from .wrapper import render_template
+from .wrapper import render, render_from_values_file
