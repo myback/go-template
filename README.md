@@ -1,5 +1,7 @@
 # Go-template
 
+!!! Do [not work](https://github.com/golang/go/issues/54805) in Linux Alpine
+
 [![PyPI Version](https://img.shields.io/pypi/v/go_template.svg)](https://pypi.python.org/pypi/go_template)
 [![Wheel Status](https://img.shields.io/badge/wheel-yes-brightgreen.svg)](https://pypi.python.org/pypi/go_template)
 ![Build Status](https://img.shields.io/travis/SixQuant/project-template-python/master.svg)
