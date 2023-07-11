@@ -1,20 +1,15 @@
 # Go-template
+Based on https://github.com/harsh-98/go-template
 
 !!! Do [not work](https://github.com/golang/go/issues/54805) in Linux Alpine
-
-[![PyPI Version](https://img.shields.io/pypi/v/go_template.svg)](https://pypi.python.org/pypi/go_template)
-[![Wheel Status](https://img.shields.io/badge/wheel-yes-brightgreen.svg)](https://pypi.python.org/pypi/go_template)
-![Build Status](https://img.shields.io/travis/SixQuant/project-template-python/master.svg)
 
 ## Overview
 Python bindings for go text/template
 
 
-
 ## Quickstart
-
-### Pip
-`go_template` works Python 3.5+.
+### Build from sources
+`go_template` works Python 3.7+.
 ```
 # if your system does not have python and golang
 make build-in-docker
@@ -23,7 +18,6 @@ make build-on-host
 ```
 
 ## Example
-
 Content of sample.tmpl
 ```
 {{.Count}} items are made of {{.Material}}
@@ -33,7 +27,7 @@ Content of sample.tmpl
 ```
 >>> import go_template
 >>> values = {"Count": 12, "Material": "Wool"}
->>> go_template.render_go_template(Path('tests/sample.tmpl'), values)
+>>> go_template.render(Path('tests/sample.tmpl'), values)
 b'12 items are made of Wool'
 ```
 
@@ -51,19 +45,16 @@ Material: Wool
 b'12 items are made of Wool'
 ```
 
-
 __NOTE__: Paths provided to render_template should either be absolute path or relative to directory where it is ran.
 
+
 ## Build shared library
-
-
 For building a fresh shared object of text/template, you must have golang^1.5 installed.
-
 ```
 make lib
 ```
+This will create `template.so` in the `bind` folder.
 
-This will create [template.so](https://github.com/harsh-98/go-template/blob/master/bind/template.so) in the `bind` folder.
 
 ## Motivation
 Currently, there is no python package which exposes golang `text/template` functionality to python. And I am in the process of learning about interoperability between different languages. So, I started working on this as a learning project.
@@ -82,5 +73,4 @@ So, I created a golang wrapper over text/template library, which takes simple da
 It is far from complete and doesn't use the best approach. Currently, it has only one function which takes path of template and value file. And depending on the third argument, either writes to stdout if empty  or to file if given its path.
 
 ## License
-
-This project is licensed under [MIT](https://github.com/harsh-98/go-template/blob/master/LICENSE) License.
+This project is licensed under [MIT](https://github.com/myback/go-template/blob/master/LICENSE) License.
