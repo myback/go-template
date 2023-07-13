@@ -1,20 +1,19 @@
 # Go-template
 Based on https://github.com/harsh-98/go-template
 
+`go_template` tested in Python 3.8.
+
 !!! Do [not work](https://github.com/golang/go/issues/54805) in Linux Alpine
 
 ## Overview
-Python bindings for go text/template
+Python bindings for go text/template with [sprig](https://github.com/Masterminds/sprig) and [helmfile](https://github.com/helmfile/helmfile) functions
 
 
 ## Quickstart
 ### Build from sources
-`go_template` works Python 3.7+.
 ```
-# if your system does not have python and golang
-make build-in-docker
-# else
-make build-on-host
+# install go
+make lib
 ```
 
 ## Example
@@ -26,6 +25,7 @@ Content of sample.tmpl
 1)  Render template from dict values
 ```
 >>> import go_template
+>>> from pathlib import Path
 >>> values = {"Count": 12, "Material": "Wool"}
 >>> go_template.render(Path('tests/sample.tmpl'), values)
 b'12 items are made of Wool'

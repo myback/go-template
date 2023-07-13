@@ -1,0 +1,4 @@
+prune */__pycache__
+recursive-exclude */__pycache__ *
+recursive-exclude src/go *
+recursive-exclude tests *

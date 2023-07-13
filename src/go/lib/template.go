@@ -4,8 +4,8 @@ import "C"
 import (
 	"bytes"
 
-	tplFunc "go-template/go/template-functions"
-	"go-template/go/utils"
+	tplFunc "go-template/tmpl-functions"
+	"go-template/utils"
 )
 
 //export Render

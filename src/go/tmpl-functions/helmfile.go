@@ -1,4 +1,4 @@
-package template_functions
+package tmpl_functions
 
 import (
 	"bytes"

@@ -1,7 +1,7 @@
 import unittest
 from pathlib import Path
 
-import go_template
+from src import go_template
 
 
 class TestRender(unittest.TestCase):

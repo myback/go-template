@@ -102,8 +102,8 @@ ENV/
 .mypy_cache/
 
 # project
-go_template/bind
+src/go_template/bind/
 .idea
-!go/lib
+!src/go/lib
 bin/
 .go_cache/

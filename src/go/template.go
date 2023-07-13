@@ -3,13 +3,12 @@ package main
 import (
 	"flag"
 	"fmt"
+	tplFunc "go-template/src/go/template-functions"
+	"go-template/src/go/utils"
 	"io"
 	"os"
 
 	"dario.cat/mergo"
-
-	tplFunc "go-template/go/template-functions"
-	"go-template/go/utils"
 )
 
 func usage() {
