@@ -16,6 +16,17 @@ Python bindings for go text/template with [sprig](https://github.com/Masterminds
 make lib
 ```
 
+### Get build lib
+```
+git clone https://github.com/myback/go-template.git
+cd go-template
+mkdir src/go_template/bind
+
+# Download pre-build lib from https://github.com/myback/go-template/releases/
+
+tar xf py_go_template_bind_linux_amd64.tgz -C src/go_template/bind
+```
+
 ## Example
 Content of sample.tmpl
 ```
